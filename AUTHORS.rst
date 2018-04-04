@@ -8,4 +8,9 @@
 Authors
 =======
 
+- Chiara Bigarella
+- Esteban J. G. Gabancho
+- Harris Tzovanakis
 - Lars Holm Nielsen
+- Nikos Filippakis
+- Sebastian Witowski
