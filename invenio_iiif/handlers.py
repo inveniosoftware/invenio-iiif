@@ -10,33 +10,39 @@
 
 import tempfile
 
+import pkg_resources
 from invenio_files_rest.models import ObjectVersion
 
+try:
+    pkg_resources.get_distribution('wand')
+    from wand.image import Image
+    HAS_IMAGEMAGICK = True
+except pkg_resources.DistributionNotFound:
+    # Python module not installed
+    HAS_IMAGEMAGICK = False
+except ImportError:
+    # ImageMagick notinstalled
+    HAS_IMAGEMAGICK = False
 
-def image_opener(uuid):
-    """Find a file based on its UUID.
 
-    :param uuid: a UUID in the form bucket:filename
-    :returns: a file path or handle to the file or its preview image
-    :rtype: string or handle
+def image_opener(key):
+    """Handler to locate file based on key.
+
+    :param key: A key encoded in the format "<bucket>e<object_key>:<version>".
+    :returns: A file-like object.
     """
     # Drop the "version" that comes after the second ":" - we use this version
     # only as key in redis cache
-    bucket, _file = uuid.split(':')[:2]
+    bucket, object_key = key.split(':')[:2]
 
-    ret = ObjectVersion.get(bucket, _file).file.uri
-    # Open the Image
-    opened_image = file_opener_xrootd(ret, 'rb')
-    if '.' in _file:
-        ext = _file.split('.')[-1]
-        if ext in ['txt', 'pdf']:
-            from wand.image import Image
-            img = Image(opened_image)
-            # Get the first page from text and pdf files
-            first_page = Image(img.sequence[0])
-            tempfile_ = tempfile.TemporaryFile()
-            with first_page.convert(format='png') as converted:
-                converted.save(file=tempfile_)
-            return tempfile_
-    # Return an open file to IIIF
-    return opened_image
+    obj = ObjectVersion.get(bucket, object_key)
+    fp = obj.file.storage().open('rb')
+
+    # If ImageMagick with Wand is installed, extract first page for PDF/text.
+    if HAS_IMAGEMAGICK and obj.mimetype in ['application/pdf', 'text/plain']:
+        first_page = Image(Image(fp).sequence[0])
+        tempfile_ = tempfile.TemporaryFile()
+        with first_page.convert(format='png') as converted:
+            converted.save(file=tempfile_)
+        return tempfile_
+    return fp
