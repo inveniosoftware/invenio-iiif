@@ -19,6 +19,11 @@ matrix:
     # To allow failures, you need to specify the full environment
     - env: REQUIREMENTS=devel
 
+addons:
+  apt:
+    packages:
+    - libfreetype6-dev
+
 cache:
   - pip
 
