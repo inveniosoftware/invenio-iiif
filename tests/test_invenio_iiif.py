@@ -32,12 +32,3 @@ def test_init():
     assert 'invenio-iiif' not in app.extensions
     ext.init_app(app)
     assert 'invenio-iiif' in app.extensions
-
-
-def test_view(app):
-    """Test view."""
-    InvenioIIIF(app)
-    with app.test_client() as client:
-        res = client.get("/")
-        assert res.status_code == 200
-        assert 'Welcome to Invenio-IIIF' in str(res.data)

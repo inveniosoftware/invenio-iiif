@@ -8,6 +8,4 @@
 Authors
 =======
 
-IIIF API for Invenio.
-
-- CERN <info@inveniosoftware.org>
+- Lars Holm Nielsen

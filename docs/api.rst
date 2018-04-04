@@ -11,9 +11,3 @@ API Docs
 
 .. automodule:: invenio_iiif.ext
    :members:
-
-Views
------
-
-.. automodule:: invenio_iiif.views
-   :members:

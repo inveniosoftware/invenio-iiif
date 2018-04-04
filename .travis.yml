@@ -54,7 +54,7 @@ deploy:
   user: inveniosoftware
   password:
     secure: TODO:PYPISECUREHASH
-  distributions: "compile_catalog sdist bdist_wheel"
+  distributions: "sdist bdist_wheel"
   on:
     tags: true
     python: "2.7"

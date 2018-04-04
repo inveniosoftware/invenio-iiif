@@ -26,9 +26,5 @@
 
 IIIF API for Invenio.
 
-*This is an experimental developer preview release.*
-
-TODO: Please provide feature overview of module
-
 Further documentation is available on
 https://invenio-iiif.readthedocs.io/

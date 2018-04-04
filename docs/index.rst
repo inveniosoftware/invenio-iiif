@@ -20,7 +20,6 @@ Invenio-IIIF.
    installation
    configuration
    usage
-   examplesapp
 
 
 API Reference

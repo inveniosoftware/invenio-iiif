@@ -18,12 +18,15 @@ history = open('CHANGES.rst').read()
 tests_require = [
     'check-manifest>=0.25',
     'coverage>=4.0',
+    # Remove elasticsearch once pytest-invenio have fixed the import.
+    'elasticsearch>=5.0.0',
+    'elasticsearch-dsl>=5.0.0',
     'isort>=4.3.3',
     'pydocstyle>=1.0.0',
-    'pytest-cache>=1.0',
     'pytest-cov>=1.8.0',
+    'pytest-invenio>=1.0.0',
     'pytest-pep8>=1.0.6',
-    'pytest>=2.8.0',
+    'pytest>=2.8.0,!=3.3.0',
 ]
 
 extras_require = {
@@ -38,12 +41,11 @@ for reqs in extras_require.values():
     extras_require['all'].extend(reqs)
 
 setup_requires = [
-    'Babel>=1.3',
     'pytest-runner>=2.6.2',
 ]
 
 install_requires = [
-    'Flask-BabelEx>=0.9.2',
+    'Flask-IIIF>=0.3.1',
 ]
 
 packages = find_packages()
@@ -60,8 +62,8 @@ setup(
     version=version,
     description=__doc__,
     long_description=readme + '\n\n' + history,
-    keywords='invenio TODO',
-    license='GPLv2',
+    keywords='invenio IIIF',
+    license='MIT',
     author='CERN',
     author_email='info@inveniosoftware.org',
     url='https://github.com/inveniosoftware/invenio-iiif',
@@ -70,7 +72,7 @@ setup(
     include_package_data=True,
     platforms='any',
     entry_points={
-        'invenio_base.apps': [
+        'invenio_base.api_apps': [
             'invenio_iiif = invenio_iiif:InvenioIIIF',
         ],
         'invenio_i18n.translations': [
@@ -95,7 +97,7 @@ setup(
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+        'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',

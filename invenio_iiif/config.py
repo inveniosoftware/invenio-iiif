@@ -7,12 +7,3 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 
 """IIIF API for Invenio."""
-
-# TODO: This is an example file. Remove it if your package does not use any
-# extra configuration variables.
-
-IIIF_DEFAULT_VALUE = 'foobar'
-"""Default value for the application."""
-
-IIIF_BASE_TEMPLATE = 'invenio_iiif/base.html'
-"""Default base template for the demo page."""
