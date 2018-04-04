@@ -18,7 +18,7 @@ history = open('CHANGES.rst').read()
 tests_require = [
     'check-manifest>=0.25',
     'coverage>=4.0',
-    # Remove elasticsearch once pytest-invenio have fixed the import.
+    # FIXME: Remove elasticsearch once pytest-invenio have fixed the es import.
     'elasticsearch>=5.0.0',
     'elasticsearch-dsl>=5.0.0',
     'isort>=4.3.3',
@@ -45,7 +45,11 @@ setup_requires = [
 ]
 
 install_requires = [
+    'Flask-CeleryExt>=0.3.0',
     'Flask-IIIF>=0.3.1',
+    'invenio-files-rest>=1.0.0a9',
+    'invenio-records-files>=1.0.0a1',
+    'Wand>=0.4.4',
 ]
 
 packages = find_packages()
@@ -75,20 +79,9 @@ setup(
         'invenio_base.api_apps': [
             'invenio_iiif = invenio_iiif:InvenioIIIF',
         ],
-        'invenio_i18n.translations': [
-            'messages = invenio_iiif',
+        'invenio_celery.tasks': [
+            'invenio_iiif = invenio_iiif.tasks',
         ],
-        # TODO: Edit these entry points to fit your needs.
-        # 'invenio_access.actions': [],
-        # 'invenio_admin.actions': [],
-        # 'invenio_assets.bundles': [],
-        # 'invenio_base.api_apps': [],
-        # 'invenio_base.api_blueprints': [],
-        # 'invenio_base.blueprints': [],
-        # 'invenio_celery.tasks': [],
-        # 'invenio_db.models': [],
-        # 'invenio_pidstore.minters': [],
-        # 'invenio_records.jsonresolver': [],
     },
     extras_require=extras_require,
     install_requires=install_requires,
