@@ -10,21 +10,22 @@
 
 from __future__ import absolute_import, print_function
 
-import shutil
-import tempfile
-
 import pytest
 from flask import Flask
+from invenio_iiif import InvenioIIIF
 
 
 @pytest.fixture(scope='module')
 def create_app():
     """Application factory fixture."""
-    def factory(**kwargs):
-        app = Flask('testapp', **kwargs)
+    def factory(**config):
+        app = Flask('testapp')
         app.config.update(
-            SECRET_KEY='SECRET_KEY',
-            TESTING=True,
+            **config
         )
+
+        ext = InvenioIIIF()
+        ext.init_app(app)
+
         return app
     return factory

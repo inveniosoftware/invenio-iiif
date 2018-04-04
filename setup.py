@@ -45,6 +45,7 @@ setup_requires = [
 ]
 
 install_requires = [
+    'Flask>=0.11.1',
     'Flask-CeleryExt>=0.3.0',
     'Flask-IIIF>=0.3.1',
     'invenio-files-rest>=1.0.0a9',

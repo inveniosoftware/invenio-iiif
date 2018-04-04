@@ -10,10 +10,6 @@
 
 from __future__ import absolute_import, print_function
 
-from flask import Flask
-
-from invenio_iiif import InvenioIIIF
-
 
 def test_version():
     """Test version import."""
@@ -21,14 +17,7 @@ def test_version():
     assert __version__
 
 
-def test_init():
+def test_init(base_app):
     """Test extension initialization."""
-    app = Flask('testapp')
-    ext = InvenioIIIF(app)
-    assert 'invenio-iiif' in app.extensions
-
-    app = Flask('testapp')
-    ext = InvenioIIIF()
-    assert 'invenio-iiif' not in app.extensions
-    ext.init_app(app)
-    assert 'invenio-iiif' in app.extensions
+    assert 'invenio-iiif' in base_app.extensions
+    assert 'iiif' in base_app.extensions
