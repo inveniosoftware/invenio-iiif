@@ -11,3 +11,12 @@
 from __future__ import absolute_import, print_function
 
 from celery import shared_task
+from flask_iiif.restful import IIIFImageAPI
+
+
+@shared_task(ignore_result=True)
+def create_thumbnail(uuid, thumbnail_width):
+    """Create the thumbnail for an image."""
+    # size = '!' + thumbnail_width + ','
+    size = thumbnail_width + ','  # flask_iiif doesn't support ! at the moment
+    thumbnail = IIIFImageAPI.get('v2', uuid, size, 0, 'default', 'jpg')
