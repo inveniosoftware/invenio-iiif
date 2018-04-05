@@ -12,9 +12,13 @@ from __future__ import absolute_import, print_function
 
 import shutil
 import tempfile
+from os.path import dirname, getsize, join
 
 import pytest
-from flask import Flask
+from flask import Flask, request
+from flask_iiif.restful import current_iiif
+from invenio_access import InvenioAccess
+from invenio_accounts import InvenioAccounts
 from invenio_db import InvenioDB
 from invenio_files_rest import InvenioFilesREST
 from invenio_files_rest.models import Bucket, Location, ObjectVersion
@@ -23,13 +27,64 @@ from six import BytesIO, b
 from invenio_iiif import InvenioIIIF
 
 
+@pytest.fixture(scope='session')
+def image_path():
+    """Path to test image.
+
+    The test image was downloaded from Flickr and marked as public domain.
+    """
+    return join(dirname(__file__), 'image-public-domain.jpg')
+
+
+@pytest.fixture(scope='module')
+def permission_factory():
+    """Permission factory that allow access based on header value."""
+    def factory(obj, action):
+        class Permission(object):
+            def can(self):
+                return request.headers.get('Authorization') != 'deny'
+        return Permission()
+    return factory
+
+
+@pytest.fixture(scope='module')
+def app_config(app_config, permission_factory):
+    """Customize application configuration."""
+    app_config['FILES_REST_PERMISSION_FACTORY'] = permission_factory
+    return app_config
+
+
+@pytest.fixture(scope='module')
+def create_app():
+    """Application factory fixture."""
+    def factory(**config):
+        app = Flask('testapp')
+        app.config.update(
+            SERVER_NAME='localhost',
+            **config
+        )
+
+        InvenioDB(app)
+        InvenioAccounts(app)
+        InvenioAccess(app)
+        InvenioFilesREST(app)
+        InvenioIIIF(app)
+
+        return app
+    return factory
+
+
+@pytest.fixture(autouse=True)
+def clear_cache(appctx):
+    """Clear cache after each test."""
+    current_iiif.cache().flush()
+
+
 @pytest.fixture(scope='module')
 def location_path():
     """Temporary directory for location path."""
     tmppath = tempfile.mkdtemp()
-
     yield tmppath
-
     shutil.rmtree(tmppath)
 
 
@@ -41,41 +96,30 @@ def location(location_path, database):
         uri=location_path,
         default=True
     )
-
     database.session.add(loc)
     database.session.commit()
-
     return loc
 
 
 @pytest.fixture(scope='module')
-def image_object(database, location):
-    """Image object."""
+def image_object(database, location, image_path):
+    """Get ObjectVersion of test image."""
     bucket = Bucket.create()
     database.session.commit()
 
-    data_bytes = b('test object')
-    obj = ObjectVersion.create(
-        bucket, 'test.jpg', stream=BytesIO(data_bytes),
-        size=len(data_bytes)
-    )
+    with open(image_path, 'rb') as fp:
+        obj = ObjectVersion.create(
+            bucket, 'test.jpg', stream=fp, size=getsize(image_path)
+        )
     database.session.commit()
-
     return obj
 
 
 @pytest.fixture(scope='module')
-def create_app():
-    """Application factory fixture."""
-    def factory(**config):
-        app = Flask('testapp')
-        app.config.update(
-            **config
-        )
-
-        InvenioDB(app)
-        InvenioFilesREST(app)
-        InvenioIIIF(app)
-
-        return app
-    return factory
+def image_uuid(image_object):
+    """Get image UUID (Flask-IIIF term, not actual an UUID)."""
+    return '{}:{}:{}'.format(
+        image_object.bucket_id,
+        image_object.version_id,
+        image_object.key
+    )

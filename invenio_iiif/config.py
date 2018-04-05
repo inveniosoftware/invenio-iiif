@@ -7,3 +7,6 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 
 """IIIF API for Invenio."""
+
+IIIF_URL_PREFIX = '/iiif/'
+"""URL prefix to IIIF API."""

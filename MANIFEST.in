@@ -21,4 +21,4 @@ recursive-include docs *.rst
 recursive-include docs *.txt
 recursive-include docs Makefile
 recursive-include invenio_iiif *.po *.pot *.mo
-recursive-include tests *.py
+recursive-include tests *.py *.jpg

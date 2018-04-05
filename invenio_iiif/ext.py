@@ -14,7 +14,7 @@ from flask_iiif import IIIF
 from flask_restful import Api
 
 from . import config
-from .handlers import image_opener
+from .handlers import image_opener, protect_api
 
 
 class InvenioIIIF(object):
@@ -32,9 +32,9 @@ class InvenioIIIF(object):
 
         ext = IIIF(app=app)
         api = Api(app=app)
-        ext.init_restful(api, prefix='/iiif/')
+        ext.init_restful(api, prefix=app.config['IIIF_URL_PREFIX'])
         ext.uuid_to_image_opener_handler(image_opener)
-        # ext.api_decorator_handler(self.protect_api)
+        ext.api_decorator_handler(protect_api)
 
     def init_config(self, app):
         """Initialize configuration."""

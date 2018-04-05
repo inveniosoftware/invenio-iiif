@@ -11,7 +11,8 @@
 import tempfile
 
 import pkg_resources
-from invenio_files_rest.models import ObjectVersion
+from flask import g
+from invenio_files_rest.views import ObjectResource
 
 try:
     pkg_resources.get_distribution('wand')
@@ -25,20 +26,35 @@ except ImportError:
     HAS_IMAGEMAGICK = False
 
 
+def protect_api(uuid=None, **kwargs):
+    """Retrieve object and check permissions.
+
+    Retrieve ObjectVersion of image being requested and check permission
+    using the Invenio-Files-REST permission factory.
+    """
+    bucket, version_id, key = uuid.split(':', 2)
+    g.obj = ObjectResource.get_object(bucket, key, version_id)
+    return g.obj
+
+
 def image_opener(key):
     """Handler to locate file based on key.
 
     :param key: A key encoded in the format "<bucket>:<version>:<object_key>".
     :returns: A file-like object.
     """
-    # Drop the "version" that comes after the first ":" - we use this version
-    # only as key in redis cache
-    bucket, version, object_key = key.split(':', 2)
+    if hasattr(g, 'obj'):
+        obj = g.obj
+        # Remove object from g to prevent surprises in tests because
+        # g stays around when using test_client and app context).
+        del g.obj
+    else:
+        obj = protect_api(key)
 
-    obj = ObjectVersion.get(bucket, object_key)
     fp = obj.file.storage().open('rb')
 
-    # If ImageMagick with Wand is installed, extract first page for PDF/text.
+    # If ImageMagick with Wand is installed, extract first page
+    # for PDF/text.
     if HAS_IMAGEMAGICK and obj.mimetype in ['application/pdf', 'text/plain']:
         first_page = Image(Image(fp).sequence[0])
         tempfile_ = tempfile.TemporaryFile()
