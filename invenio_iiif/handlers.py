@@ -28,12 +28,12 @@ except ImportError:
 def image_opener(key):
     """Handler to locate file based on key.
 
-    :param key: A key encoded in the format "<bucket>e<object_key>:<version>".
+    :param key: A key encoded in the format "<bucket>:<version>:<object_key>".
     :returns: A file-like object.
     """
-    # Drop the "version" that comes after the second ":" - we use this version
+    # Drop the "version" that comes after the first ":" - we use this version
     # only as key in redis cache
-    bucket, object_key = key.split(':')[:2]
+    bucket, version, object_key = key.split(':', 2)
 
     obj = ObjectVersion.get(bucket, object_key)
     fp = obj.file.storage().open('rb')
