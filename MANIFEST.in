@@ -20,5 +20,6 @@ recursive-include docs *.py
 recursive-include docs *.rst
 recursive-include docs *.txt
 recursive-include docs Makefile
+recursive-include invenio_iiif *.html
 recursive-include invenio_iiif *.po *.pot *.mo
 recursive-include tests *.py *.jpg

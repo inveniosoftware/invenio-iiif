@@ -47,7 +47,7 @@ setup_requires = [
 install_requires = [
     'Flask>=0.11.1',
     'Flask-CeleryExt>=0.3.0',
-    'Flask-IIIF>=0.3.1',
+    'Flask-IIIF>=0.3.2',
     # FIXME: Invenio-Files-REST should specify Invenio-Access as requirement.
     'invenio-access>=1.0.0',
     'invenio-files-rest>=1.0.0a9',
@@ -79,11 +79,20 @@ setup(
     include_package_data=True,
     platforms='any',
     entry_points={
-        'invenio_base.api_apps': [
+        'invenio_base.apps': [
             'invenio_iiif = invenio_iiif:InvenioIIIF',
+        ],
+        'invenio_base.api_apps': [
+            'invenio_iiif = invenio_iiif:InvenioIIIFAPI',
+        ],
+        'invenio_base.blueprints': [
+            'invenio_iiif = invenio_iiif.previewer:blueprint',
         ],
         'invenio_celery.tasks': [
             'invenio_iiif = invenio_iiif.tasks',
+        ],
+        'invenio_previewer.previewers': [
+            'iiif_image = invenio_iiif.previewer',
         ],
     },
     extras_require=extras_require,

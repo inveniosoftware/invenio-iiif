@@ -60,5 +60,4 @@ def test_get_restricted_image_info(base_client, image_object, image_uuid):
     assert base_client.get(
         info_url,
         headers={'Authorization': 'deny'}
-    ).status_code == 200
-    # FIXME: Bug in Flask-IIIF. This should be 404.
+    ).status_code == 404

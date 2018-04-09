@@ -24,7 +24,8 @@ from invenio_files_rest import InvenioFilesREST
 from invenio_files_rest.models import Bucket, Location, ObjectVersion
 from six import BytesIO, b
 
-from invenio_iiif import InvenioIIIF
+from invenio_iiif import InvenioIIIFAPI
+from invenio_iiif.previewer import blueprint
 
 
 @pytest.fixture(scope='session')
@@ -51,6 +52,7 @@ def permission_factory():
 def app_config(app_config, permission_factory):
     """Customize application configuration."""
     app_config['FILES_REST_PERMISSION_FACTORY'] = permission_factory
+    app_config['PREVIEWER_ABSTRACT_TEMPLATE'] = 'invenio_iiif/base.html'
     return app_config
 
 
@@ -68,7 +70,9 @@ def create_app():
         InvenioAccounts(app)
         InvenioAccess(app)
         InvenioFilesREST(app)
-        InvenioIIIF(app)
+        InvenioIIIFAPI(app)
+
+        app.register_blueprint(blueprint)
 
         return app
     return factory

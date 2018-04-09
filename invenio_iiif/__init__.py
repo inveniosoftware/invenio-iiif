@@ -10,7 +10,7 @@
 
 from __future__ import absolute_import, print_function
 
-from .ext import InvenioIIIF
+from .ext import InvenioIIIF, InvenioIIIFAPI
 from .version import __version__
 
 __all__ = ('__version__', 'InvenioIIIF')
