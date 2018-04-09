@@ -22,7 +22,6 @@ from invenio_accounts import InvenioAccounts
 from invenio_db import InvenioDB
 from invenio_files_rest import InvenioFilesREST
 from invenio_files_rest.models import Bucket, Location, ObjectVersion
-from six import BytesIO, b
 
 from invenio_iiif import InvenioIIIFAPI
 from invenio_iiif.previewer import blueprint

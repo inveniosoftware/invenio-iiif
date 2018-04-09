@@ -45,9 +45,6 @@ def image_opener(key):
     """
     if hasattr(g, 'obj'):
         obj = g.obj
-        # Remove object from g to prevent surprises in tests because
-        # g stays around when using test_client and app context).
-        del g.obj
     else:
         obj = protect_api(key)
 
