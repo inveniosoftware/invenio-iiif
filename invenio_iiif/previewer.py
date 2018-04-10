@@ -10,9 +10,7 @@
 
 from __future__ import absolute_import, print_function
 
-from copy import deepcopy
-
-from flask import Blueprint, abort, current_app, render_template, request
+from flask import Blueprint, current_app, render_template
 
 from .utils import ui_iiif_image_url
 

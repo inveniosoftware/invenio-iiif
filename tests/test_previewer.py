@@ -10,9 +10,6 @@
 
 from __future__ import absolute_import, print_function
 
-import pytest
-from flask_iiif import iiif_image_url
-
 from invenio_iiif.previewer import can_preview, preview, previewable_extensions
 from invenio_iiif.utils import ui_iiif_image_url
 
