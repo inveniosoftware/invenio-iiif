@@ -10,6 +10,8 @@
 
 from __future__ import absolute_import, print_function
 
+from copy import deepcopy
+
 from flask import Blueprint, current_app, render_template
 
 from .utils import ui_iiif_image_url
@@ -32,11 +34,15 @@ def can_preview(file):
 
 def preview(file):
     """Render appropriate template with embed flag."""
+    params = deepcopy(current_app.config['IIIF_PREVIEWER_PARAMS'])
+    if 'image_format' not in params:
+        params['image_format'] = \
+            'png' if file.has_extensions('.png') else 'jpg'
     return render_template(
         current_app.config['IIIF_PREVIEW_TEMPLATE'],
         file=file,
         file_url=ui_iiif_image_url(
             file.file,
-            **current_app.config['IIIF_PREVIEWER_PARAMS']
+            **params
         )
     )

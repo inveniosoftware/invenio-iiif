@@ -112,7 +112,7 @@ def image_object(database, location, image_path):
 
     with open(image_path, 'rb') as fp:
         obj = ObjectVersion.create(
-            bucket, u'test-ünicode.jpg', stream=fp, size=getsize(image_path)
+            bucket, u'test-ünicode.png', stream=fp, size=getsize(image_path)
         )
     database.session.commit()
     return obj

@@ -41,3 +41,5 @@ def test_preview(image_object):
     """Test preview."""
     assert ui_iiif_image_url(image_object, size='750,', image_format='jpg') \
         in preview(MockPreviewFile(image_object, 'jpg'))
+    assert ui_iiif_image_url(image_object, size='750,', image_format='png') \
+        in preview(MockPreviewFile(image_object, 'png'))
