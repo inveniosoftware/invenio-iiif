@@ -12,6 +12,7 @@ from __future__ import absolute_import, print_function
 
 import pytest
 from flask_iiif import iiif_image_url
+from six.moves.urllib.parse import quote
 
 from invenio_iiif.utils import iiif_image_key, ui_iiif_image_url
 
@@ -27,7 +28,7 @@ def app_config(app_config):
 
 def test_iiif_image_key(image_object):
     """Test retrieval of image."""
-    key = '{}:{}:{}'.format(
+    key = u'{}:{}:{}'.format(
         image_object.bucket_id,
         image_object.version_id,
         image_object.key,

@@ -33,7 +33,7 @@ def image_path():
 
     The test image was downloaded from Flickr and marked as public domain.
     """
-    return join(dirname(__file__), 'image-public-domain.jpg')
+    return join(dirname(__file__), u'image-public-domain.jpg')
 
 
 @pytest.fixture(scope='module')
@@ -112,7 +112,7 @@ def image_object(database, location, image_path):
 
     with open(image_path, 'rb') as fp:
         obj = ObjectVersion.create(
-            bucket, 'test.jpg', stream=fp, size=getsize(image_path)
+            bucket, u'test-ünicode.jpg', stream=fp, size=getsize(image_path)
         )
     database.session.commit()
     return obj
@@ -121,7 +121,7 @@ def image_object(database, location, image_path):
 @pytest.fixture(scope='module')
 def image_uuid(image_object):
     """Get image UUID (Flask-IIIF term, not actual an UUID)."""
-    return '{}:{}:{}'.format(
+    return u'{}:{}:{}'.format(
         image_object.bucket_id,
         image_object.version_id,
         image_object.key
