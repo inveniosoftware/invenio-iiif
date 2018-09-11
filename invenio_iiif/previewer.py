@@ -16,7 +16,7 @@ from flask import Blueprint, current_app, render_template
 
 from .utils import ui_iiif_image_url
 
-previewable_extensions = ['jpg', 'jpeg', 'png']
+previewable_extensions = ['jpg', 'jpeg', 'png', 'tif', 'tiff']
 
 blueprint = Blueprint(
     'invenio_iiif',
@@ -28,7 +28,7 @@ blueprint = Blueprint(
 
 def can_preview(file):
     """Determine if the given file can be previewed."""
-    supported_extensions = ('.jpg', '.jpeg', '.png')
+    supported_extensions = ('.jpg', '.jpeg', '.png', '.tif', '.tiff')
     return file.has_extensions(*supported_extensions)
 
 
