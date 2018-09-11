@@ -27,7 +27,7 @@ class MockPreviewFile(object):
 
 def test_previewable_extensions():
     """Test extension requirements."""
-    assert previewable_extensions == ['jpg', 'jpeg', 'png']
+    assert previewable_extensions == ['jpg', 'jpeg', 'png', 'tif', 'tiff']
 
 
 def test_can_preview():
