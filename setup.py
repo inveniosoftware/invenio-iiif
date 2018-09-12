@@ -21,6 +21,7 @@ tests_require = [
     # FIXME: Remove elasticsearch once pytest-invenio have fixed the es import.
     'elasticsearch>=5.0.0',
     'elasticsearch-dsl>=5.0.0',
+    'invenio-db>=1.0.0b3',
     'isort>=4.3.3',
     'pydocstyle>=1.0.0',
     'pytest-cov>=1.8.0',
@@ -50,7 +51,7 @@ install_requires = [
     'Flask-IIIF>=0.4.0',
     # FIXME: Invenio-Files-REST should specify Invenio-Access as requirement.
     'invenio-access>=1.0.0',
-    'invenio-files-rest>=1.0.0a9',
+    'invenio-files-rest>=1.0.0a23',
     'invenio-records-files>=1.0.0a9',
     'six>=1.11.0',
     'Wand>=0.4.4',
