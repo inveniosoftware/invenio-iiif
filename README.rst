@@ -1,6 +1,6 @@
 ..
     This file is part of Invenio.
-    Copyright (C) 2018 CERN.
+    Copyright (C) 2018-2019 CERN.
 
     Invenio is free software; you can redistribute it and/or modify it
     under the terms of the MIT License; see LICENSE file for more details.
@@ -21,7 +21,12 @@
 .. image:: https://img.shields.io/pypi/v/invenio-iiif.svg
         :target: https://pypi.org/pypi/invenio-iiif
 
-IIIF API for Invenio.
+Invenio module to deliver images complying with IIIF standard.
 
-Further documentation is available on
-https://invenio-iiif.readthedocs.io/
+Features:
+
+- Retrieve and serve image files using Invenio files.
+- Allows to define custom REST API endpoint prefix.
+- Provide celery task to create image thumbnails.
+
+Further documentation available: https://invenio-iiif.readthedocs.io/
