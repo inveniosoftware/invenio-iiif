@@ -22,7 +22,7 @@ tests_require = [
     'elasticsearch>=5.0.0',
     'elasticsearch-dsl>=5.0.0',
     'invenio-db>=1.0.0b3',
-    'isort>=4.3.3',
+    'isort>=4.3.4',
     'pydocstyle>=1.0.0',
     'pytest-cov>=1.8.0',
     'pytest-invenio>=1.0.0',
@@ -47,7 +47,7 @@ setup_requires = [
 
 install_requires = [
     'Flask>=0.11.1',
-    'Flask-CeleryExt>=0.3.0',
+    'Flask-CeleryExt>=0.3.1',
     'Flask-IIIF>=0.4.0',
     # FIXME: Invenio-Files-REST should specify Invenio-Access as requirement.
     'invenio-access>=1.0.0',
