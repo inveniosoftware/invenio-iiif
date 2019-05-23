@@ -22,11 +22,13 @@
         :target: https://pypi.org/pypi/invenio-iiif
 
 Invenio module to deliver images complying with IIIF standard.
+It allows users to preview images with specified size, format and zoom.
 
 Features:
 
 - Retrieve and serve image files using Invenio files.
-- Allows to define custom REST API endpoint prefix.
+- Allows to prewiew, resize and zoom images, by implementing the `IIIF <https://iiif.io/>`_ API.
 - Provide celery task to create image thumbnails.
+- Allows to define custom REST API endpoint prefix.
 
 Further documentation available: https://invenio-iiif.readthedocs.io/
