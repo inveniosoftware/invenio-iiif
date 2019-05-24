@@ -5,6 +5,8 @@
     Invenio is free software; you can redistribute it and/or modify it
     under the terms of the MIT License; see LICENSE file for more details.
 
+.. _install:
+
 Installation
 ============
 
@@ -15,14 +17,8 @@ Invenio-IIIF is on PyPI so all you need is:
    $ pip install invenio-iiif
 
 
-Invenio-IIIF uses `Pillow <https://pillow.readthedocs.io>`_ for image display
-and processing.
+Invenio-IIIF uses `Pillow <https://pillow.readthedocs.io>`_ for image
+processing.
 
-To create cover images from PDFs, you need to install locally the ImageMagick image library
-and the `Wand <http://docs.wand-py.org>`_ python module.
-
-.. code-block:: console
-
-   $ pip install Wand
-
-
+To create cover images from PDFs, you need to install locally the ImageMagick
+image library. See https://imagemagick.org for details.

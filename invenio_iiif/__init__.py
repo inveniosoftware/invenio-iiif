@@ -76,7 +76,7 @@ PDF cover
 ~~~~~~~~~
 
 When the retrieved file is a PDF and with ImageMagick/Wand installed in your
-environment (see ``Configuration`` documentation), then a cover image with the
+environment (see :ref:`install` documentation), then a cover image with the
 first page of the PDF file can be generated and served it as preview.
 
 Authorization
