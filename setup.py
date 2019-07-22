@@ -24,12 +24,12 @@ tests_require = [
     'pydocstyle>=1.0.0',
     'pytest-invenio>=1.1.1',
     'pytest-pep8>=1.0.6',
-    'pytest>=3.7.0',
+    'pytest>=4.0.0,<5.0.0',
 ]
 
 extras_require = {
     'docs': [
-        'Sphinx>=1.5.1',
+        'Sphinx>=1.8.0',
     ],
     'tests': tests_require,
 }
