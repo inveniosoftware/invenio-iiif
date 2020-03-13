@@ -9,8 +9,6 @@
 notifications:
   email: false
 
-sudo: false
-
 language: python
 
 matrix:
@@ -33,10 +31,11 @@ env:
   - REQUIREMENTS=devel
 
 python:
-  - "2.7"
-  - "3.5"
+  - "3.6"
+  - "3.7"
 
 before_install:
+  - "pip uninstall -y six"
   - "nvm install 6; nvm use 6"
   - "travis_retry pip install --upgrade pip setuptools py"
   - "travis_retry pip install twine wheel coveralls requirements-builder"
@@ -60,8 +59,9 @@ deploy:
   password:
     secure: ZYK3NxUZoFMjNgcdNrlZYWizH9ndDhf2MtnJ/6qYxCNQt7sOWGV+eDfTORtFyS0X+TGODmFlD6et5NcAikyH03t3F9FlxwJKIvNDdE6mO6uoCe4/ZAjuqf/yy0jlmifcPbTBnhJ3h6P+li/oY8MzyOMA2vQkyfBupDksggS8uJjNV0aFKNq/82FrLYicakkl55qxh10h0wkgjBwcirkWDufbo1SPFFx5GdFQ59O2G55hnz/IP2HtvCGXW++OByi1AR/a54DhZASB3fdaXV9B6nJC+5cVnCKQF3KsySIwuqIFPzHj5WWlDX3xkgxyuv3JyVuFuiqARCGtAer0Wuhju/HOgk3Kp5wKsl0/38vJhFW9EKyFvrdFlk0IKFk0gH/0SVs/O4SjodeuXM+yGlxNveRBriVWgtCHLeY8HwZ1q6a1Vx667ebkvM7LDJPJp6Ax30oOJA3vhnU4V5OZp9GUyBwu3e8y8A6MxPX5jxRzw30JPBw1xIbER0z0WuwXmnyjBXkhGLitLXZ+noPv1vS/DoKd/nB33ntCOhrcCmw8JJEYrUrcHARiV+inZPfcav2XkXqJjoLmO5RWPP2Fbe7pbmfUItMXn5Y4f5lIn/il2+5cux54C0scRWv5ZF9mCudrfJmHoMZvd3VrGN8ZrBZnt4BJvrgDl/95yEhayi84jR8=
   distributions: "sdist bdist_wheel"
+  skip_existing: true
   on:
     tags: true
-    python: "2.7"
+    python: "3.6"
     repo: inveniosoftware/invenio-iiif
     condition: $DEPLOY = true
