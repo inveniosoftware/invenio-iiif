@@ -12,8 +12,8 @@
 .. image:: https://img.shields.io/github/license/inveniosoftware/invenio-iiif.svg
         :target: https://github.com/inveniosoftware/invenio-iiif/blob/master/LICENSE
 
-.. image:: https://img.shields.io/travis/inveniosoftware/invenio-iiif.svg
-        :target: https://travis-ci.org/inveniosoftware/invenio-iiif
+.. image:: https://github.com/inveniosoftware/invenio-iiif/workflows/CI/badge.svg
+        :target: https://github.com/inveniosoftware/invenio-iiif/actions
 
 .. image:: https://img.shields.io/coveralls/inveniosoftware/invenio-iiif.svg
         :target: https://coveralls.io/r/inveniosoftware/invenio-iiif
