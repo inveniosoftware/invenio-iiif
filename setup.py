@@ -17,8 +17,8 @@ history = open('CHANGES.rst').read()
 
 tests_require = [
     'urllib3>=1.21.1,<1.25',
-    'invenio-db>=1.0.0',
-    'pytest-invenio>=1.4.0',
+    'invenio-db[versioning,postgresql]>=1.0.0',
+    'pytest-invenio>=1.4.2',
 ]
 
 extras_require = {
