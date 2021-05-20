@@ -37,6 +37,7 @@ setup_requires = [
 ]
 
 install_requires = [
+    'Flask>=1.1,<2.0',
     'Flask-IIIF>=0.6.1',
     'invenio-access>=1.4.0',
     'invenio-base>=1.2.2',
