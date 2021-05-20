@@ -17,7 +17,7 @@ history = open('CHANGES.rst').read()
 
 tests_require = [
     'urllib3>=1.21.1,<1.25',
-    'invenio-db[versioning,postgresql]>=1.0.0',
+    'invenio-db[versioning,postgresql]>=1.0.9',
     'pytest-invenio>=1.4.2',
 ]
 
@@ -39,9 +39,9 @@ setup_requires = [
 install_requires = [
     'Flask>=1.1,<2.0',
     'Flask-IIIF>=0.6.1',
-    'invenio-access>=1.4.0',
-    'invenio-base>=1.2.2',
-    'invenio-celery>=1.2.0',
+    'invenio-access>=1.4.2',
+    'invenio-base>=1.2.4',
+    'invenio-celery>=1.2.2',
     'invenio-files-rest>=1.0.0',
     'invenio-records-files>=1.0.0',
     'Wand>=0.4.4',
