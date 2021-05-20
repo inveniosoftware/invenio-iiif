@@ -21,3 +21,9 @@ IIIF_PREVIEWER_PARAMS = {
 
 IIIF_PREVIEW_TEMPLATE = 'invenio_iiif/preview.html'
 """Template for IIIF image preview."""
+
+IIIF_API_DECORATOR_HANDLER = 'invenio_iiif.handlers:protect_api'
+"""Image opener handler decorator."""
+
+IIIF_IMAGE_OPENER_HANDLER = 'invenio_iiif.handlers:image_opener'
+"""Image opener handler function."""

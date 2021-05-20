@@ -8,13 +8,11 @@
 
 """IIIF API for Invenio."""
 
-from __future__ import absolute_import, print_function
-
 from flask_iiif import IIIF
 from flask_restful import Api
+from invenio_base.utils import obj_or_import_string
 
 from . import config
-from .handlers import image_opener, protect_api
 
 
 class InvenioIIIF(object):
@@ -29,7 +27,14 @@ class InvenioIIIF(object):
         """Flask application initialization."""
         self.init_config(app)
         self.iiif_ext = IIIF(app=app)
-        self.iiif_ext.api_decorator_handler(protect_api)
+        # register decorator if configured
+        decorator_handler = app.config["IIIF_API_DECORATOR_HANDLER"]
+        if decorator_handler:
+            decorator_handler_func = obj_or_import_string(decorator_handler)
+            self.iiif_ext.api_decorator_handler(decorator_handler_func)
+        # register image opener handler
+        image_opener = obj_or_import_string(
+            app.config["IIIF_IMAGE_OPENER_HANDLER"])
         self.iiif_ext.uuid_to_image_opener_handler(image_opener)
         app.extensions['invenio-iiif'] = self
 
