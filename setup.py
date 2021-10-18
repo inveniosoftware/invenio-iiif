@@ -40,9 +40,9 @@ setup_requires = [
 install_requires = [
     'Flask-IIIF>=0.6.1',
     'invenio-access>=1.4.2',
-    'invenio-base>=1.2.4',
-    'invenio-celery>=1.2.2',
-    'invenio-files-rest>=1.0.0',
+    'invenio-base>=1.2.5',
+    'invenio-celery>=1.2.3',
+    'invenio-files-rest>=1.3.0',
     'invenio-records-files>=1.0.0',
     'Wand>=0.4.4',
 ]
