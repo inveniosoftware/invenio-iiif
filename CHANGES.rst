@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version 1.2.0 (released 2021-10-20)
+
+- Unpin Flask.
+
 Version 1.1.1 (released 2021-05-27)
 
 - Make API decorator and image opener handler configurable.
