@@ -12,7 +12,6 @@ from __future__ import absolute_import, print_function
 
 import pytest
 from flask_iiif import iiif_image_url
-from six.moves.urllib.parse import quote
 
 from invenio_iiif.utils import iiif_image_key, ui_iiif_image_url
 

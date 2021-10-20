@@ -10,9 +10,10 @@
 
 from __future__ import absolute_import, print_function
 
+from urllib.parse import quote
+
 from flask import current_app
 from invenio_files_rest.models import ObjectVersion
-from six.moves.urllib_parse import quote
 
 
 def iiif_image_key(obj):
